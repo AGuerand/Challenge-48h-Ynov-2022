@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block body %}
+{# {{ event.nom }}
+<p>a</p>
+{{ event.id }}
+<p>b</p>
+{{app.user.Id}}
+<p>c</p> #}
+{{ form_start(event_form) }}
+        <button id="display" type="submit" class="btn" style="display:block">Confirmer l'inscription</button>
+{{ form_end(event_form) }}
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    {% for events in event.getAttendantId %}
+        {% if events.Id == app.user.Id %}
+            <p>deja enregistrer</p>
+            <a href="{{ path('app_event') }}">Retour</a>
+            <script type="text/javascript">
+                document.getElementById("display").style.display = "none";
+            </script>
+        {% endif %}
+        {# <p>d</p>
+        {{app.user.Id}}
+        <p>{{ events.Id }}</p>
+        <p>d</p> #}
+    {% endfor %}
+{% else %}
+    <script type="text/javascript">
+                document.getElementById("display").style.display = "none";
+            </script>
+    <a href="{{ path('app_register') }}">Please Register</a>
+{% endif %}
+{% endblock %}

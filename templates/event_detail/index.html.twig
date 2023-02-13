@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail Event{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous"/>
+    		
+            <link rel="stylesheet" type="text/css" href="../../public/style/style.css"/>
+			<link rel="stylesheet" type="text/css" href="../../public/style/style.css"/>
+			<link rel="stylesheet" type="text/css" href="../../public/style/style.css"/>
+    
+    <div class="container">
+        <div class="img-container">
+            <img src=" {{ event.image }} " alt="Image des events" style="width: 25%; height: 25%;">
+        </div>
+        <div class="container__info">
+            <h2 style="">
+                <span>{{ event.contenu }}</span>
+            </h2>
+            <span>
+                <i class="fas fa-eye"></i>
+                {{ event.attendant }}
+            </span>
+            <span>
+                <i class="fas fa-comment-alt" style="margin-left: 10px"></i>624
+            </span>
+            {% if app.user %}
+                <a type="submit" href="{{ path('join_article', {'id': event.id} ) }}" style="margin-left: 10px;">Join the event</a>
+            {% endif %}
+        </div>
+        {% if event.getUserId.Id == app.user.Id or app.user.username == "Admin" %}
+                    <a href="{{ path('edit_article', {'id': event.id} ) }}" style="margin-left: 10px;">edit event</a>
+        {% endif %}
+        <div class="container__profile">
+            <div class="container__profile__text">
+                <h2>
+                    <b>{{ event.getUserId.username }}</b>
+                </h2>
+                <h2>{{ event.date|date('d/m/Y à H:i:s') }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="comments">
+        <h5 class="card-title">Commentaires</h5>
+            <section id="commentaire">
+                {% for commentaire in event.commentaires %}
+                    <div class="row">
+                        <a href="\">{{commentaire.UserId.username}}</a>
+                        <p>{{ commentaire.createdAt|date('d/m/Y à H:i:s') }}</p>
+                        <p>{{ commentaire.contenu|raw }}</p>
+                    </div>
+                {% endfor %}
+            </section>
+            {% if app.user %}
+                {{ form_start(formCommentaire) }}
+                {{ form_row(formCommentaire.contenu, {
+                    'attr': {
+                        'placeholder': "Commentaire"
+                    }
+                }) }}
+                <button type="submit" class="ajouter">New</button>
+                    {{ form_end(formCommentaire) }}
+            {% endif %}
+    </div>
+{% endblock %}

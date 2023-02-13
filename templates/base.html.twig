@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" type="text/css" href="style/style.css"/>
+		<link rel="stylesheet" type="text/css" href="style/card.css" />
+		<link rel="stylesheet" type="text/css" href="style/navbar.css"/>
+        <link rel="stylesheet" type="text/css" href="style/searchbar.css"/>
+	</head>
+
+	{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+	{% block stylesheets %}
+		{{ encore_entry_link_tags('app') }}
+	{% endblock %}
+
+	{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+	{% endblock %}
+</html>
+<body style="background-color:#e8e8e8">
+
+<div class="">
+    <div class="">
+    <!-- HEADER -->
+        <header>
+            <div class="header" id="myHeader">
+                <!-- LOGO -->
+                <a href="/" class="logo">
+                    <div class="logo-containerr">
+                        {# <img src="../assets/images/logo.png" alt="Home" class="logo-img"></img> #}
+                        <h1 class="logo-txt">Meet</h1>
+                    </div>
+                </a>
+                <!-- END LOGO -->
+
+                <!-- SEARCHBAR -->
+                <div class="search-container">
+                    <form method="GET" action="/">
+                        <img class="search-icon" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2Ljk2NiA1Ni45NjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU2Ljk2NiA1Ni45NjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTU1LjE0Niw1MS44ODdMNDEuNTg4LDM3Ljc4NmMzLjQ4Ni00LjE0NCw1LjM5Ni05LjM1OCw1LjM5Ni0xNC43ODZjMC0xMi42ODItMTAuMzE4LTIzLTIzLTIzcy0yMywxMC4zMTgtMjMsMjMgIHMxMC4zMTgsMjMsMjMsMjNjNC43NjEsMCw5LjI5OC0xLjQzNiwxMy4xNzctNC4xNjJsMTMuNjYxLDE0LjIwOGMwLjU3MSwwLjU5MywxLjMzOSwwLjkyLDIuMTYyLDAuOTIgIGMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxNyAgcy0xNy03LjYyNi0xNy0xN1MxNC42MSw2LDIzLjk4NCw2eiIgZmlsbD0iIzAwMDAwMCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K">
+                        <input placeholder="Search.." type="search" class="search" style="background: white;" list="listArtists" id="searchbarr" name="query">
+                    </form>
+                </div>
+                <!-- END SEARCHBAR -->
+
+                <!-- PANNEL -->
+                
+                <div class="right-container">
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        {{ app.user.getUsername }}
+                        <a class="register" href="/form">Form</a>
+                        <a class="inactive" href="/logout">Log out</a>
+                    {% else %}
+                        <a class="register" href="/register">Register</a>
+                        <a class="active" href="/login">Log in</a> 
+                    {% endif %}
+                    {#  <a class="active" href="/login">Log in</a> 
+                        <a class="inactive" href="/logout">Log out</a> #}
+                </div>
+                <!-- END PANNEL -->
+            </div>
+        </header>
+    </div>
+</div>
+{# </ul></body></div></div></body></nav><div class="container"> {% block body %}{% endblock %}</div></body></html> #}
+{% block body %}{% endblock %}
